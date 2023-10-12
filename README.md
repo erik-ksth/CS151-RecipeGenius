@@ -9,7 +9,7 @@
 
 **State the problem/issue to resolve**: Many people struggle with meal planning. Recipe Genius will provide a variety of delicious recipes based on the available ingredients. 
 
-**Previous works & References**: 
+**Previous works & References**: https://www.supercook.com/#/desktop
 
 **Assumptions / operating environments / intended usage**: Generating recipe based on the available ingredients 
 
