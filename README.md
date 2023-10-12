@@ -1,9 +1,9 @@
 # CS151-Title
 The group project for CS 151: Object Oriented Design course at San José State University.
 
-Project title : 
+Project title : Recipe Genius
 Team KMH, team members : Kaung Sithu Hein (017376619), May Sabai (017390438), Hardik
-Team members working on the proposal : 
+Team members working on the proposal : Kaung Sithu Hein (017376619), May Sabai (017390438), Hardik
 State the problem/issue to resolve : 
 
 Previous works & References : 
