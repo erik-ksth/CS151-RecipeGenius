@@ -1,5 +1,5 @@
 # CS151-RecipeGenius
-The group project for CS 151: Object Oriented Design course at San José State University.
+**The group project for CS 151: Object Oriented Design course at San José State University.**
 
 **Project title**: Recipe Genius
 
@@ -11,17 +11,17 @@ The group project for CS 151: Object Oriented Design course at San José State U
 
 **Previous works & References**: 
 
-**Assumptions / operating environments / intended usage**: 
-
+**Assumptions / operating environments / intended usage**: Generating recipe based on the available ingredients 
 
 
 **Plan and approach to the solution**:  
 
 **How our solution tackles the issues**: 
+Users do not need to come up with recipes and instructions by themselves. They will no longer need to brainstorm and spend a long time searching for the right recipe on the internet. Instead, they can use Recipe Genius, which will help them save time and energy by generating delicious recipes with detailed instructions. Recipes are also diverse, from Asian to Western food, from sweet to spicy. 
 
 **List of operations for each intended user (in list format)**:
-- Users input any ingredients that they have at home
-- Recipe Genius  generate a list of recipe that can be created with the available ingredients
+- Users input any ingredients that they have at home (e.g. carrot, potato, garlic, etc.)
+- Recipe Genius generate a list of recipe that can be created with the available ingredients
 - Users then choose the recipe they prefer
 - Recipe Genius shows the detailed cooking instructions
 
