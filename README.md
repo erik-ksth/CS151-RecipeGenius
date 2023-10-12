@@ -20,17 +20,15 @@
 3. We will catch the user input (ingredients) with the Scanner class
 4. We might either write our own method or use available ones to match the input with the database 
 6. We will list the dishes that have the most matches
-7. Users can see the detailed instructions once they choose the recipe.
-8. If users are unsatisfied, they can choose another recipe. 
+7. Users can see the detailed instructions once they choose the dish.
+8. If unsatisfied, users can choose another dish or recipe. 
 
 
 **How our solution tackles the issues**: 
-Users do not need to come up with recipes and instructions by themselves. They will no longer need to brainstorm and spend a long time searching for the right recipe on the internet. Instead, they can use Recipe Genius, which will help them save time and energy by generating delicious recipes with detailed instructions. Recipes are also diverse, from Asian to Western food, from sweet to spicy. 
+Users do not need to come up with dishes by themselves. They will no longer need to brainstorm and spend a long time searching for the right recipe on the internet. Instead, they can use Recipe Genius, which will help them save time and energy by generating delicious recipes with detailed instructions. Recipes are also diverse, from Asian to Western food, from sweet to spicy. 
 
 **List of operations for each intended user (in list format)**:
-- Users input any ingredients that they have at home (e.g. carrot, potato, garlic, etc.)
-- Recipe Genius generate a list of recipe that can be created with the available ingredients
-- Users then choose the recipe they prefer
-- Recipe Genius shows the detailed cooking instructions
-
-**References: must include citations in content using the format [1], [2], etc.**: 
+- Users input any ingredients that they have at home (e.g., carrot, potato, garlic, etc.)
+- Recipe Genius generates a list of dishes that can be created with the available ingredients
+- Users then choose the dish they prefer
+- Recipe Genius shows the detailed recipe or cooking instructions
