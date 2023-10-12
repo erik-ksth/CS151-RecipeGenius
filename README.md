@@ -2,6 +2,7 @@
 The group project for CS 151: Object Oriented Design course at San José State University.
 
 Project title: Recipe Genius
+
 Team KMH, team members : Kaung Sithu Hein (017376619), May Sabai (017390438), Hardik
 
 Team members working on the proposal: Kaung Sithu Hein (017376619), May Sabai (017390438), Hardik
@@ -11,9 +12,10 @@ State the problem/issue to resolve: Many people struggle with meal planning. Rec
 Previous works & References : 
 
 Assumptions / operating environments / intended usage : 
-There are two applications for the Recipe Genius. 
-One is depending on what ingredients the user has at home, Recipe Genius will generate the exact or closed recipe that the user can create. 
-Another application is when the user inputs the name of the dish, Recipe Genius will generate detailed instructions. 
+- Users input any ingredients that they have at home
+- Recipe Genius  generate a list of recipe that can be created with the available ingredients
+- Users then choose the recipe they prefer
+- Recipe Genius shows the detailed cooking instructions
 
 Plan and approach to the solution :  
 
