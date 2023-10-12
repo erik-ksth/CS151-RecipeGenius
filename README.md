@@ -9,6 +9,9 @@ State the problem/issue to resolve: Many people struggle with meal planning. Rec
 Previous works & References : 
 
 Assumptions / operating environments / intended usage : 
+There are two applications for the Recipe Genius. 
+One is depending on what ingredients the user has at home, Recipe Genius will generate the exact or closed recipe that the user can create. 
+Another application is when the user inputs the name of the dish, Recipe Genius will generate detailed instructions. 
 
 Plan and approach to the solution :  
 
