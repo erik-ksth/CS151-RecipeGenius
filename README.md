@@ -12,10 +12,7 @@ The group project for CS 151: Object Oriented Design course at San José State U
 **Previous works & References**: 
 
 **Assumptions / operating environments / intended usage**: 
-- Users input any ingredients that they have at home
-- Recipe Genius  generate a list of recipe that can be created with the available ingredients
-- Users then choose the recipe they prefer
-- Recipe Genius shows the detailed cooking instructions
+
 
 
 **Plan and approach to the solution**:  
@@ -23,6 +20,9 @@ The group project for CS 151: Object Oriented Design course at San José State U
 **How our solution tackles the issues**: 
 
 **List of operations for each intended user (in list format)**:
-
+- Users input any ingredients that they have at home
+- Recipe Genius  generate a list of recipe that can be created with the available ingredients
+- Users then choose the recipe they prefer
+- Recipe Genius shows the detailed cooking instructions
 
 **References: must include citations in content using the format [1], [2], etc.**: 
