@@ -16,6 +16,7 @@
 
 **Plan and approach to the solution**:  
 
+
 **How our solution tackles the issues**: 
 Users do not need to come up with recipes and instructions by themselves. They will no longer need to brainstorm and spend a long time searching for the right recipe on the internet. Instead, they can use Recipe Genius, which will help them save time and energy by generating delicious recipes with detailed instructions. Recipes are also diverse, from Asian to Western food, from sweet to spicy. 
 
