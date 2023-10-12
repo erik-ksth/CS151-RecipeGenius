@@ -2,7 +2,7 @@
 The group project for CS 151: Object Oriented Design course at San José State University.
 
 Project title : 
-Team KMH, team members : Kaung Sithu Hein (), May Sabai (017390438), Hardik
+Team KMH, team members : Kaung Sithu Hein (017376619), May Sabai (017390438), Hardik
 Team members working on the proposal : 
 State the problem/issue to resolve : 
 
