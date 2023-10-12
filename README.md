@@ -1,7 +1,7 @@
 # CS151-RecipeGenius
 The group project for CS 151: Object Oriented Design course at San José State University.
 
-Project title: Recipe Genius
+**Project title**: Recipe Genius
 
 Team KMH, team members : Kaung Sithu Hein (017376619), May Sabai (017390438), Hardik
 
