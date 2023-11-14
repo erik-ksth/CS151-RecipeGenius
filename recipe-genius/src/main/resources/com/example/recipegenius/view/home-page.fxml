@@ -5,12 +5,23 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+
+<?import java.net.URL?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" styleClass="container"
       fx:controller="com.example.recipegenius.controller.HomePageController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="1.0" left="20.0" right="20.0" top="100.0"/>
     </padding>
 
-    <Label text="Welcome to Recipe Genius"/>
-    <Button text="Get Started" onAction="#getStartedButton"/>
+    <stylesheets>
+        <URL value="@home-page.css"/>
+    </stylesheets>
+
+    <Label text="Welcome to" styleClass="welcomeText"/>
+    <Label text="Recipe Genius" styleClass="recipeGenius"/>
+    <Label text="Are you hungry but don’t know what to cook for today?" styleClass="greeting"/>
+    <Label text="Don’t worry, we can help you find delicious recipes" styleClass="greeting"/>
+
+    <Button text="Get Started" onAction="#getStartedButton" styleClass="button1"/>
+
 </VBox>
