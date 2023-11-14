@@ -1,5 +1,6 @@
 package com.example.recipegenius;
 
+import com.example.recipegenius.controller.BaseController;
 import com.example.recipegenius.controller.HomePageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,7 @@ public class Main extends Application {
         root = new StackPane();
 
         // Load the initial page
-        loadPage("/com/example/recipegenius/view/home-page.fxml");
+        loadHomePage();
 
         // Set up the primary stage
         primaryStage.setTitle("Recipe Genius");
@@ -38,8 +39,8 @@ public class Main extends Application {
             Parent page = loader.load();
 
             // Set the reference to the Main application in the controller
-            if (loader.getController() instanceof HomePageController) {
-                ((HomePageController) loader.getController()).setMainApp(this);
+            if (loader.getController() instanceof BaseController) {
+                ((BaseController) loader.getController()).setMainApp(this);
             }
 
             root.getChildren().clear();
@@ -49,8 +50,16 @@ public class Main extends Application {
         }
     }
 
-    // Example methods to switch between pages
+    private void loadHomePage() {
+        loadPage("/com/example/recipegenius/view/home-page.fxml");
+    }
+
+    // Switch between pages
     public void switchToIngredientsPage() {
         loadPage("/com/example/recipegenius/view/ingredients-page.fxml");
+    }
+
+    public void switchToRecipesPage() {
+        loadPage("/com/example/recipegenius/view/recipes-page.fxml");
     }
 }

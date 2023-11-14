@@ -13,10 +13,5 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label text="Add your ingredients here."/>
-    <HBox alignment="CENTER">
-        <TextField fx:id="inputField" promptText="Enter ingredients"/>
-        <Button text="Add"/>
-    </HBox>
-    <Button text="Continue" onAction="#goToRecipesPage"/>
+    <Label text="See the recipes!"/>
 </VBox>

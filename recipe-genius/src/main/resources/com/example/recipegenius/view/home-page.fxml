@@ -22,6 +22,6 @@
     <Label text="Are you hungry but don’t know what to cook for today?" styleClass="greeting"/>
     <Label text="Don’t worry, we can help you find delicious recipes" styleClass="greeting"/>
 
-    <Button text="Get Started" onAction="#getStartedButton" styleClass="button1"/>
+    <Button text="Get Started" onAction="#goToIngredientsPage" styleClass="button1"/>
 
 </VBox>
