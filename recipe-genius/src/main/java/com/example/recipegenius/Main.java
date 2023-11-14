@@ -24,7 +24,7 @@ public class Main extends Application {
 
         // Set up the primary stage
         primaryStage.setTitle("Recipe Genius");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 1200, 800));
         primaryStage.show();
     }
 
