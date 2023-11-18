@@ -1,5 +1,4 @@
 package com.example.recipegenius.model;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,14 +11,15 @@ import java.util.List;
 
 public class Api {
     public static void main(String[] args) {
+
         // Create an ArrayList for ingredients
         List<String> ingredients = new ArrayList<>();
-        int numberOfRecipes = 15;
+        int numberOfRecipes = 6;
         try {
             String apiKey = "5dc3339e14f64eecb9f8d41188bbf0f9";
 
             // Add elements to the list
-            ingredients.add("Beef");
+            ingredients.add("Pork");
             ingredients.add("Bell Pepper");
             ingredients.add("honey");
 
@@ -40,8 +40,8 @@ public class Api {
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 // Read the response
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line;
                 StringBuilder response = new StringBuilder();
+                String line;
 
                 while ((line = reader.readLine()) != null) {
                     response.append(line);

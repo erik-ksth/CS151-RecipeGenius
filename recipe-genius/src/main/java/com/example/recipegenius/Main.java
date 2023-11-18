@@ -1,7 +1,6 @@
 package com.example.recipegenius;
 
 import com.example.recipegenius.controller.BaseController;
-import com.example.recipegenius.controller.HomePageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -1,5 +1,4 @@
 package com.example.recipegenius.controller;
-import com.example.recipegenius.Main;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
