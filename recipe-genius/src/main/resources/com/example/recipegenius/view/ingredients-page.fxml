@@ -15,9 +15,18 @@
     </padding>
 
     <Label text="Add your ingredients here."/>
-    <VBox alignment="CENTER">
-        <TextField fx:id="inputField" promptText="Enter ingredients" onKeyReleased="#handleInput"/>
-        <ListView fx:id="suggestionList"/>
+    <HBox alignment="TOP_CENTER">
+        <VBox alignment="CENTER">
+            <TextField fx:id="inputField" promptText="Enter ingredients" onKeyReleased="#handleInput"/>
+            <ListView fx:id="suggestionList" prefHeight="120.0" visible="false"/>
+        </VBox>
+        <Button text="Add" onAction="#addIngredient" />
+    </HBox>
+    <VBox fx:id="ingredientListContainer" alignment="BASELINE_LEFT">
+        <HBox fx:id="ingredientContainer">
+            <Label fx:id="ingredientLabel"/>
+            <Button fx:id="deleteButton"/>
+        </HBox>
     </VBox>
     <Button text="Continue" onAction="#goToRecipesPage"/>
 </VBox>

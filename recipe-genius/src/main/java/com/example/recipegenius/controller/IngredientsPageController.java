@@ -1,12 +1,18 @@
 package com.example.recipegenius.controller;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.example.recipegenius.model.IngredientList;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -18,11 +24,46 @@ public class IngredientsPageController extends BaseController {
     @FXML
     private ListView<String> suggestionList;
 
+    @FXML
+    private VBox ingredientListContainer;
+
+    @FXML
+    private HBox ingredientContainer;
+
+    @FXML
+    private Label ingredientLabel;
+
+    @FXML
+    private Button deleteButton;
+
+    IngredientList ingredientList = new IngredientList();
+
     // Get the user input and call autocomplete method
     @FXML
     private void handleInput() {
-        String userInput = inputField.getText();
-        autoComplete(userInput);
+        autoComplete(inputField.getText());
+    }
+
+    // Add ingredients
+    @FXML
+    private void addIngredient() {
+        String newIngredient = inputField.getText();
+        if (suggestionList.getItems().contains(newIngredient)) {
+            ingredientList.addIngredient(newIngredient);
+            // Display new ingredient
+            ingredientLabel = new Label(newIngredient);
+            deleteButton = new Button("Delete");
+            ingredientContainer = new HBox(ingredientLabel, deleteButton);
+            // Set up the delete action for the new button
+            deleteButton.setOnAction(event -> deleteIngredient(ingredientContainer, ingredientLabel));
+            ingredientListContainer.getChildren().add(ingredientContainer);
+            // Clear the inputfield and autocomplete list data
+            inputField.clear();
+            suggestionList.getItems().clear();
+            System.out.println("Ingredients: " + ingredientList.getIngredients());
+        } else {
+            System.out.println("Invalid input");
+        }
     }
 
     // Auto-complete method
@@ -68,6 +109,18 @@ public class IngredientsPageController extends BaseController {
                         System.out.println("Name: " + ingredientName);
                         suggestionList.getItems().add(ingredientName);
                     }
+
+                    // Set the visibility of the suggestionList
+                    suggestionList.setVisible(!suggestionList.getItems().isEmpty());
+                    
+                    // Add an event handler to the suggestionList
+                    suggestionList.setOnMouseClicked(e -> {
+                        String selectedItem = suggestionList.getSelectionModel().getSelectedItem();
+                        // Set the selected item into the inputField
+                        inputField.setText(selectedItem);
+                        // Close the auto-complete box
+                        suggestionList.setVisible(false);
+                    });
                 }
 
             } else {
@@ -76,6 +129,12 @@ public class IngredientsPageController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void deleteIngredient(HBox ingredientContainer, Label ingredientLabel) {
+        ingredientList.removeIngredient(ingredientLabel.getText());
+        ingredientListContainer.getChildren().remove(ingredientContainer);
+        System.out.println("Ingredients: " + ingredientList.getIngredients());
     }
 
     // Go to Next page

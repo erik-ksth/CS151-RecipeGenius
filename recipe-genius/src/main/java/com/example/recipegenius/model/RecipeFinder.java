@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Api {
+public class RecipeFinder {
     public static void main(String[] args) {
 
         // Create an ArrayList for ingredients
