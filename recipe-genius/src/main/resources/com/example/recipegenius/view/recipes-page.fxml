@@ -14,4 +14,8 @@
     </padding>
 
     <Label text="See the recipes!"/>
+    <ListView fx:id="recipeLinkContainer">
+        <Label fx:id="recipeName"/>
+        <Hyperlink fx:id="recipeLink"/>
+    </ListView>
 </VBox>

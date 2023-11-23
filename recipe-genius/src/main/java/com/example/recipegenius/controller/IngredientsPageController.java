@@ -1,4 +1,5 @@
 package com.example.recipegenius.controller;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.example.recipegenius.model.IngredientList;
+import com.example.recipegenius.model.RecipeFinder;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -50,13 +52,18 @@ public class IngredientsPageController extends BaseController {
         String newIngredient = inputField.getText();
         if (suggestionList.getItems().contains(newIngredient)) {
             ingredientList.addIngredient(newIngredient);
+
             // Display new ingredient
             ingredientLabel = new Label(newIngredient);
             deleteButton = new Button("Delete");
             ingredientContainer = new HBox(ingredientLabel, deleteButton);
+
             // Set up the delete action for the new button
             deleteButton.setOnAction(event -> deleteIngredient(ingredientContainer, ingredientLabel));
+
+            // Append new ingredient
             ingredientListContainer.getChildren().add(ingredientContainer);
+
             // Clear the inputfield and autocomplete list data
             inputField.clear();
             suggestionList.getItems().clear();
@@ -66,18 +73,36 @@ public class IngredientsPageController extends BaseController {
         }
     }
 
+    // Go to Next page
+    @FXML
+    protected void goToRecipesPage() {
+        RecipeFinder recipeFinder = new RecipeFinder();
+        recipeFinder.findRecipes(ingredientList);
+        mainApp.switchToRecipesPage();
+    }
+
     // Auto-complete method
     private void autoComplete(String userInput) {
+
         try {
+            // Properties properties = new Properties();
+            // InputStream input = getClass().getResourceAsStream("application.properties");
+            // properties.load(input);
+            // input.close();
+
+            // String apiKey = properties.getProperty("SPOONACULAR_API_KEY");
+            // System.out.println("API KEY ==== "+apiKey);
             String apiKey = "5dc3339e14f64eecb9f8d41188bbf0f9";
-            String url = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=" + apiKey + "&query=" + userInput + "&number=5";
-            
+
+            String url = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=" + apiKey + "&query="
+                    + userInput + "&number=5";
+
             // Create a URL object
             URL apiUrl = new URL(url);
 
             // Open a connection to the URL
             HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
-            
+
             // Set the request method to GET
             connection.setRequestMethod("GET");
 
@@ -112,7 +137,7 @@ public class IngredientsPageController extends BaseController {
 
                     // Set the visibility of the suggestionList
                     suggestionList.setVisible(!suggestionList.getItems().isEmpty());
-                    
+
                     // Add an event handler to the suggestionList
                     suggestionList.setOnMouseClicked(e -> {
                         String selectedItem = suggestionList.getSelectionModel().getSelectedItem();
@@ -137,9 +162,4 @@ public class IngredientsPageController extends BaseController {
         System.out.println("Ingredients: " + ingredientList.getIngredients());
     }
 
-    // Go to Next page
-    @FXML
-    protected void goToRecipesPage() {
-        mainApp.switchToRecipesPage();
-    }
 }
