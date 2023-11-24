@@ -1,5 +1,5 @@
 .container {
-    -fx-background-image: url("../images/homePageBg.jpg");
+    -fx-background-image: url("../images/AddIngredients.jpg");
     -fx-background-size: cover;
 }
 
@@ -7,7 +7,7 @@
     -fx-background-color: rgba(169, 169, 169, 0.5); /* Grey color with 50% opacity */
 }
 
-.welcomeText {
+.AddIngredients {
     -fx-font-size: 40px;
     -fx-text-fill: white;
     -fx-font-family: "Times New Roman", Times, serif;
@@ -15,30 +15,25 @@
     -fx-text-indent: 100px;
 }
 
-.recipeGenius {
-    -fx-font-size: 70px;
-    -fx-text-fill: white;
-    -fx-font-family: "Times New Roman", Times, serif;
-    -fx-font-weight: bold;
-    -fx-text-indent: 100px;
-}
-
-.greeting {
-    -fx-font-size: 30px;
-    -fx-text-fill: white;
-    -fx-font-family: "Times New Roman", Times, serif;
-    -fx-text-indent: 10px;
-
-}
-
-.button1 {
+.InputBox {
     -fx-background-color: #FFFFFF;
     -fx-text-fill: black;
     -fx-text-align: center;
     -fx-display: inline-block;
-    -fx-font-size: 30px;
+    -fx-font-size: 20px;
     -fx-font-family: "Times New Roman", Times, serif;
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
-    -fx-cursor: pointer;
 }
+
+.AddButton {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+    -fx-text-align: center;
+    -fx-display: inline-block;
+    -fx-font-size: 20px;
+    -fx-font-family: "Times New Roman", Times, serif;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+}
+

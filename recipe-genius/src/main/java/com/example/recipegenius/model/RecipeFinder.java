@@ -7,23 +7,45 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Api {
-    public static void main(String[] args) {
-        // Create an ArrayList for ingredients
-        List<String> ingredients = new ArrayList<>();
-        int numberOfRecipes = 15;
+public class RecipeFinder {
+
+    private IngredientList ingredientList;
+
+    // Constructors
+    public RecipeFinder() {
+    }
+
+    public RecipeFinder(IngredientList ingredientList) {
+        this.ingredientList = ingredientList;
+    }
+
+    // Getter
+    public IngredientList getIngredientList() {
+        return ingredientList;
+    }
+
+    // Setter
+    public void setIngredientList(IngredientList ingredientList) {
+        this.ingredientList = ingredientList;
+    }
+
+    // Method to find recipes
+    public void findRecipes(IngredientList ingredientList) {
+        int numberOfRecipes = 6;
         try {
+            
+            // Load properties from the .env file
+            // Properties properties = new Properties();
+            // FileInputStream input = new FileInputStream("com/example/recipegenius/.env");
+            // properties.load(input);
+            // input.close();
+
+            // String apiKey = properties.getProperty("SPOONACULAR_API_KEY");
             String apiKey = "5dc3339e14f64eecb9f8d41188bbf0f9";
 
-            // Add elements to the list
-            ingredients.add("Beef");
-            ingredients.add("Bell Pepper");
-            ingredients.add("honey");
-
-            String url = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=" + apiKey + "&ingredients=" + String.join(",", ingredients) + "&number=" + numberOfRecipes;
+            String url = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=" + apiKey + "&ingredients="
+                    + String.join(",+", ingredientList.getIngredients()) + "&number=" + numberOfRecipes;
 
             // Create a URL object
             URL apiUrl = new URL(url);
@@ -40,8 +62,8 @@ public class Api {
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 // Read the response
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line;
                 StringBuilder response = new StringBuilder();
+                String line;
 
                 while ((line = reader.readLine()) != null) {
                     response.append(line);
@@ -50,7 +72,7 @@ public class Api {
                 reader.close();
                 // System.out.println(response);
 
-//              // Parse the JSON response
+                // Parse the JSON response
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode jsonNode = objectMapper.readTree(response.toString());
 
