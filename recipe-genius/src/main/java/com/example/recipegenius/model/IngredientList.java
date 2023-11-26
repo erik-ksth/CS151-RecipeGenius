@@ -22,6 +22,10 @@ public class IngredientList {
           this.ingredients.remove(ingredientName);
      }
 
+     public int getLength() {
+          return ingredients.size();
+     }
+
      public List<String> getIngredients() {
           // Return a copy to avoid direct manipulation of the internal list
           return new ArrayList<>(ingredients);

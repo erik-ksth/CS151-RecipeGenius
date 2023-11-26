@@ -1,5 +1,6 @@
 package com.example.recipegenius.model;
 
+import com.example.recipegenius.controller.RecipesPageController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -10,28 +11,18 @@ import java.net.URL;
 
 public class RecipeFinder {
 
-    private IngredientList ingredientList;
-
     // Constructors
     public RecipeFinder() {
     }
 
-    public RecipeFinder(IngredientList ingredientList) {
-        this.ingredientList = ingredientList;
-    }
-
-    // Getter
-    public IngredientList getIngredientList() {
-        return ingredientList;
-    }
-
-    // Setter
-    public void setIngredientList(IngredientList ingredientList) {
-        this.ingredientList = ingredientList;
-    }
+    String apiKey = "5dc3339e14f64eecb9f8d41188bbf0f9";
 
     // Method to find recipes
-    public void findRecipes(IngredientList ingredientList) {
+    public RecipesList findRecipes(IngredientList ingredientList) {
+
+        // Create a list to store recipes
+        RecipesList recipesList = new RecipesList();
+
         int numberOfRecipes = 6;
         try {
             
@@ -42,7 +33,6 @@ public class RecipeFinder {
             // input.close();
 
             // String apiKey = properties.getProperty("SPOONACULAR_API_KEY");
-            String apiKey = "5dc3339e14f64eecb9f8d41188bbf0f9";
 
             String url = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=" + apiKey + "&ingredients="
                     + String.join(",+", ingredientList.getIngredients()) + "&number=" + numberOfRecipes;
@@ -70,23 +60,71 @@ public class RecipeFinder {
                 }
 
                 reader.close();
-                // System.out.println(response);
 
                 // Parse the JSON response
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode jsonNode = objectMapper.readTree(response.toString());
 
-                int i = 0;
-                // Print out dish names
-                RecipeInfo recipeInfoFetcher = new RecipeInfo(apiKey);
+                // Display Recipe on the page
                 for (JsonNode recipe : jsonNode) {
+                    RecipeInfo recipeInfo = new RecipeInfo();
                     int recipeId = recipe.get("id").asInt();
-                    System.out.println("No." + (i + 1));
-                    recipeInfoFetcher.fetchRecipeInfo(recipeId);
-                    System.out.println("Missed Ingredient Count: " + recipe.get("missedIngredientCount").asInt());
-                    System.out.println(" ");
-                    i++;
+                    recipeInfo.setRecipeId(recipeId);
+                    fetchRecipeInfo(recipeInfo, recipeId);
+                    recipeInfo.setMissedIngredientCount(recipe.get("missedIngredientCount").asInt());
+                    recipesList.addRecipe(recipeInfo);
+                    RecipesPageController recipesPageController = new RecipesPageController();
+//                    recipesPageController.displayRecipe(recipeInfo);
                 }
+
+            } else {
+                System.out.println("Error: " + responseCode);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return recipesList;
+    }
+
+    // Method to find recipe detail
+    public void fetchRecipeInfo(RecipeInfo recipeInfo, int recipeId) {
+        try {
+            String url = "https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey=" + apiKey;
+
+            // Create a URL object
+            URL apiUrl = new URL(url);
+
+            // Open a connection to the URL
+            HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
+
+            // Set the request method to GET
+            connection.setRequestMethod("GET");
+
+            // Get the response code
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Read the response
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+
+                reader.close();
+
+                // Parse the JSON response for recipe information
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode recipe = objectMapper.readTree(response.toString());
+
+                // Print out recipe information
+                recipeInfo.setRecipeName(recipe.get("title").asText());
+                recipeInfo.setImageUrl(recipe.get("image").asText());
+                recipeInfo.setInstructionUrl(recipe.get("sourceUrl").asText());
 
             } else {
                 System.out.println("Error: " + responseCode);

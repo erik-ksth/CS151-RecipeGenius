@@ -1,64 +1,67 @@
 package com.example.recipegenius.model;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 public class RecipeInfo {
-    private final String apiKey;
 
-    public RecipeInfo(String apiKey) {
-        this.apiKey = apiKey;
+    private int recipeId;
+
+    private String recipeName;
+
+    private String imageUrl;
+
+    private String instructionUrl;
+
+    private int missedIngredientCount;
+
+    // constructors
+    public RecipeInfo() {};
+
+    public RecipeInfo(int recipeId, String recipeName, String imageUrl, String instructionUrl, int missedIngredientCount) {
+        this.recipeId = recipeId;
+        this.recipeName = recipeName;
+        this.imageUrl = imageUrl;
+        this.instructionUrl = instructionUrl;
+        this.missedIngredientCount = missedIngredientCount;
     }
 
-    public void fetchRecipeInfo(int recipeId) {
-        try {
-            String url = "https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey=" + apiKey;
+    // Getters
+    public int getRecipeId() {
+        return recipeId;
+    }
 
-            // Create a URL object
-            URL apiUrl = new URL(url);
+    public String getRecipeName() {
+        return recipeName;
+    }
 
-            // Open a connection to the URL
-            HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
-            // Set the request method to GET
-            connection.setRequestMethod("GET");
+    public String getInstructionUrl() {
+        return instructionUrl;
+    }
 
-            // Get the response code
-            int responseCode = connection.getResponseCode();
+    public int getMissedIngredientCount() {
+        return missedIngredientCount;
+    }
 
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Read the response
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line;
-                StringBuilder response = new StringBuilder();
+    // Setters
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
+    }
 
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
 
-                reader.close();
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
-                // Parse the JSON response for recipe information
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode recipeInfo = objectMapper.readTree(response.toString());
+    public void setInstructionUrl(String instructionUrl) {
+        this.instructionUrl = instructionUrl;
+    }
 
-                // Print out recipe information
-                System.out.println("ID " + recipeId);
-                System.out.println("Name: " + recipeInfo.get("title").asText());
-                System.out.println("Image: " + recipeInfo.get("image").asText());
-                System.out.println("Instructions: " + recipeInfo.get("sourceUrl").asText());
-
-            } else {
-                System.out.println("Error: " + responseCode);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void setMissedIngredientCount(int missedIngredientCount) {
+        this.missedIngredientCount = missedIngredientCount;
     }
 }
