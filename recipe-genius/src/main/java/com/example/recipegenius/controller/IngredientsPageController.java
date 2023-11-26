@@ -14,7 +14,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.example.recipegenius.model.IngredientList;
-import com.example.recipegenius.model.RecipeFinder;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -54,9 +53,9 @@ public class IngredientsPageController extends BaseController {
             ingredientList.addIngredient(newIngredient);
 
             // Display new ingredient
-            ingredientLabel = new Label(newIngredient);
-            deleteButton = new Button("Delete");
-            ingredientContainer = new HBox(ingredientLabel, deleteButton);
+            Label ingredientLabel = new Label(newIngredient);
+            Button deleteButton = new Button("Delete");
+            HBox ingredientContainer = new HBox(ingredientLabel, deleteButton);
 
             // Set up the delete action for the new button
             deleteButton.setOnAction(event -> deleteIngredient(ingredientContainer, ingredientLabel));
@@ -76,9 +75,15 @@ public class IngredientsPageController extends BaseController {
     // Go to Next page
     @FXML
     protected void goToRecipesPage() {
-        RecipeFinder recipeFinder = new RecipeFinder();
-        recipeFinder.findRecipes(ingredientList);
-        mainApp.switchToRecipesPage();
+        // Check if at least an ingredient has been added.
+        if (ingredientList.getLength() > 0) {
+            // Pass ingredientList data to recipe page
+            RecipesPageController recipesPageController = new RecipesPageController();
+            recipesPageController.generateRecipes(ingredientList);
+            mainApp.switchToRecipesPage();
+        } else {
+            System.out.println("Please add some ingredients.");
+        }
     }
 
     // Auto-complete method
