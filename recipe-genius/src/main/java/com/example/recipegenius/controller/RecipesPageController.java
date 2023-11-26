@@ -31,7 +31,7 @@ public class RecipesPageController extends BaseController {
 
           // Iterate through the RecipeInfo objects in the RecipesList
           for (RecipeInfo recipeInfo : recipesList.getRecipesList()) {
-               recipeName.setText("Hi");
+               System.out.println("Recipe Name: " + recipeInfo.getRecipeName());
 //               missedIngredientCount.setText("Missed Ingredients: " + recipeInfo.getMissedIngredientCount());
           }
      }
