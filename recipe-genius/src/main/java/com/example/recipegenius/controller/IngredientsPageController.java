@@ -78,9 +78,9 @@ public class IngredientsPageController extends BaseController {
         // Check if at least an ingredient has been added.
         if (ingredientList.getLength() > 0) {
             // Pass ingredientList data to recipe page
+            mainApp.switchToRecipesPage();
             RecipesPageController recipesPageController = new RecipesPageController();
             recipesPageController.generateRecipes(ingredientList);
-            mainApp.switchToRecipesPage();
         } else {
             System.out.println("Please add some ingredients.");
         }

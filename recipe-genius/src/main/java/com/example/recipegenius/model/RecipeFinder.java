@@ -1,6 +1,5 @@
 package com.example.recipegenius.model;
 
-import com.example.recipegenius.controller.RecipesPageController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,7 +14,7 @@ public class RecipeFinder {
     public RecipeFinder() {
     }
 
-    String apiKey = "5dc3339e14f64eecb9f8d41188bbf0f9";
+    String apiKey = "8b9a3194041449aa92f2de40d9cefc96";
 
     // Method to find recipes
     public RecipesList findRecipes(IngredientList ingredientList) {
@@ -73,8 +72,6 @@ public class RecipeFinder {
                     fetchRecipeInfo(recipeInfo, recipeId);
                     recipeInfo.setMissedIngredientCount(recipe.get("missedIngredientCount").asInt());
                     recipesList.addRecipe(recipeInfo);
-                    RecipesPageController recipesPageController = new RecipesPageController();
-//                    recipesPageController.displayRecipe(recipeInfo);
                 }
 
             } else {
@@ -121,7 +118,7 @@ public class RecipeFinder {
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode recipe = objectMapper.readTree(response.toString());
 
-                // Print out recipe information
+                // Set recipe information
                 recipeInfo.setRecipeName(recipe.get("title").asText());
                 recipeInfo.setImageUrl(recipe.get("image").asText());
                 recipeInfo.setInstructionUrl(recipe.get("sourceUrl").asText());
