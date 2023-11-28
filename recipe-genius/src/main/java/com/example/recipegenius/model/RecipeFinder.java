@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 public class RecipeFinder {
 
@@ -14,10 +15,10 @@ public class RecipeFinder {
     public RecipeFinder() {
     }
 
-    String apiKey = "8b9a3194041449aa92f2de40d9cefc96";
+    String apiKey = "bf457e24348349a49fbd2894f67de249";
 
     // Method to find recipes
-    public RecipesList findRecipes(IngredientList ingredientList) {
+    public RecipesList findRecipes(List<String> ingredientList) {
 
         // Create a list to store recipes
         RecipesList recipesList = new RecipesList();
@@ -34,7 +35,7 @@ public class RecipeFinder {
             // String apiKey = properties.getProperty("SPOONACULAR_API_KEY");
 
             String url = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=" + apiKey + "&ingredients="
-                    + String.join(",+", ingredientList.getIngredients()) + "&number=" + numberOfRecipes;
+                    + String.join(",+", ingredientList) + "&number=" + numberOfRecipes;
 
             // Create a URL object
             URL apiUrl = new URL(url);

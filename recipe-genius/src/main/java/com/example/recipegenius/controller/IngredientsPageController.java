@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.example.recipegenius.model.DataHolder;
 import com.example.recipegenius.model.IngredientList;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -78,9 +79,10 @@ public class IngredientsPageController extends BaseController {
         // Check if at least an ingredient has been added.
         if (ingredientList.getLength() > 0) {
             // Pass ingredientList data to recipe page
+            DataHolder.setIngredients(ingredientList.getIngredients());
             mainApp.switchToRecipesPage();
             RecipesPageController recipesPageController = new RecipesPageController();
-            recipesPageController.generateRecipes(ingredientList);
+            recipesPageController.passIngredients(ingredientList);
         } else {
             System.out.println("Please add some ingredients.");
         }
@@ -97,7 +99,7 @@ public class IngredientsPageController extends BaseController {
 
             // String apiKey = properties.getProperty("SPOONACULAR_API_KEY");
             // System.out.println("API KEY ==== "+apiKey);
-            String apiKey = "5dc3339e14f64eecb9f8d41188bbf0f9";
+            String apiKey = "bf457e24348349a49fbd2894f67de249";
 
             String url = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=" + apiKey + "&query="
                     + userInput + "&number=5";
