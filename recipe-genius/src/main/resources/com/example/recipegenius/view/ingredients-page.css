@@ -63,3 +63,6 @@
     -fx-background-image: url("../images/deleteIcon.svg");
 }
 
+.errorMessage {
+    -fx-text-fill: red;
+}

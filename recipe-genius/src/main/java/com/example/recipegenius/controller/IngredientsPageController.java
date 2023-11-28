@@ -18,6 +18,7 @@ import com.example.recipegenius.model.DataHolder;
 import com.example.recipegenius.model.IngredientList;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.text.Text;
 
 public class IngredientsPageController extends BaseController {
 
@@ -38,6 +39,9 @@ public class IngredientsPageController extends BaseController {
 
     @FXML
     private Button deleteButton;
+
+    @FXML
+    private Text errorMessage;
 
     IngredientList ingredientList = new IngredientList();
 
@@ -69,12 +73,16 @@ public class IngredientsPageController extends BaseController {
             // Append new ingredient
             ingredientListContainer.getChildren().add(ingredientContainer);
 
+            // Delete Error Message
+            errorMessage.setText("");
+
             // Clear the inputfield and autocomplete list data
             inputField.clear();
             suggestionList.getItems().clear();
             System.out.println("Ingredients: " + ingredientList.getIngredients());
         } else {
             System.out.println("Invalid input");
+            errorMessage.setText("Invalid input");
         }
     }
 
@@ -90,6 +98,7 @@ public class IngredientsPageController extends BaseController {
             recipesPageController.passIngredients(ingredientList);
         } else {
             System.out.println("Please add some ingredients.");
+            errorMessage.setText("Please add some ingredients.");
         }
     }
 
@@ -145,6 +154,7 @@ public class IngredientsPageController extends BaseController {
                         String ingredientName = suggestion.get("name").asText();
                         System.out.println("Name: " + ingredientName);
                         suggestionList.getItems().add(ingredientName);
+                        errorMessage.setText("");
                     }
 
                     // Set the visibility of the suggestionList
