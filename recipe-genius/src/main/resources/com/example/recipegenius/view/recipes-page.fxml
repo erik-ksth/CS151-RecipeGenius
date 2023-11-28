@@ -32,30 +32,5 @@
     <Label text="We have found these recipes for you!" styleClass="ShowRecipes"/>
 
     <!-- Define the TilePane -->
-    <TilePane fx:id="recipesContainer" alignment="CENTER" hgap="30.0" vgap="30.0">
-        <VBox alignment="BOTTOM_CENTER" styleClass="recipe-container">
-            <Label text="Image1" styleClass="ShowMenu"/>
-            <Text text="Missed Ingredients" styleClass="MissedIngredients"/>
-        </VBox>
-
-        <VBox alignment="BOTTOM_CENTER" styleClass="recipe-container">
-            <Label text="Image2" styleClass="ShowMenu"/>
-            <Text text="Missed Ingredients" styleClass="MissedIngredients"/>
-        </VBox>
-
-        <VBox alignment="BOTTOM_CENTER" styleClass="recipe-container">
-            <Label text="Image3" styleClass="ShowMenu"/>
-            <Text text="Missed Ingredients" styleClass="MissedIngredients"/>
-        </VBox>
-
-        <VBox alignment="BOTTOM_CENTER" styleClass="recipe-container">
-            <Label text="Image4" styleClass="ShowMenu"/>
-            <Text text="Missed Ingredients" styleClass="MissedIngredients"/>
-        </VBox>
-
-        <VBox alignment="BOTTOM_CENTER" styleClass="recipe-container">
-            <Label text="Image5" styleClass="ShowMenu"/>
-            <Text text="Missed Ingredients" styleClass="MissedIngredients"/>
-        </VBox>
-    </TilePane>
+    <TilePane fx:id="recipesContainer" alignment="CENTER" hgap="30.0" vgap="30.0"/>
 </VBox>

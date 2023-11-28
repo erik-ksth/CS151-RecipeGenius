@@ -55,7 +55,9 @@ public class IngredientsPageController extends BaseController {
 
             // Display new ingredient
             Label ingredientLabel = new Label(newIngredient);
+            ingredientLabel.getStyleClass().add("IngredientLabel");
             Button deleteButton = new Button("Delete");
+            deleteButton.getStyleClass().add("DeleteButton");
             HBox ingredientContainer = new HBox(ingredientLabel, deleteButton);
 
             // Set up the delete action for the new button

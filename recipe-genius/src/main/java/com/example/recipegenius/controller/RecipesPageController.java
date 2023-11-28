@@ -40,13 +40,11 @@ public class RecipesPageController extends BaseController {
           // Call the generateRecipes method with the obtained ingredientList
           // generateRecipes(ingredients);
           List<String> ingredients = DataHolder.getIngredients();
-          System.out.println("Initalized: " + ingredients);
           generateRecipes(ingredients);
      }
 
      // Generate Recipes
      public void generateRecipes(List<String> ingredients) {
-          System.out.println("Generate Recipes with ingredients: " + ingredients);
           RecipeFinder recipeFinder = new RecipeFinder();
           RecipesList recipesList = recipeFinder.findRecipes(ingredients);
 
@@ -56,8 +54,11 @@ public class RecipesPageController extends BaseController {
                     System.out.println(recipeInfo.getRecipeName());
                     
                     Label recipeName = new Label(recipeInfo.getRecipeName());
+                    recipeName.getStyleClass().add("ShowMenu");
                     Text missedIngredientCount = new Text("Missed Ingredients Count: " + recipeInfo.getMissedIngredientCount());
+                    missedIngredientCount.getStyleClass().add("MissedIngredients");
                     VBox recipeContainer = new VBox(recipeName, missedIngredientCount);
+                    recipeContainer.getStyleClass().add("recipe-container");
                     recipesContainer.getChildren().addAll(recipeContainer);
                }
           } catch (NullPointerException e) {
