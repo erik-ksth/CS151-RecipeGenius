@@ -36,8 +36,7 @@
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
 }
-.ingredientLable{
--fx-background-color:"";
+.ingredientLable {
 }
 .listContainer{
         -fx-alignment: center-right;

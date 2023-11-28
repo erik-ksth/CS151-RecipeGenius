@@ -1,7 +1,5 @@
 package com.example.recipegenius.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,7 +17,6 @@ import com.example.recipegenius.model.IngredientList;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 
 public class IngredientsPageController extends BaseController {
@@ -46,7 +43,7 @@ public class IngredientsPageController extends BaseController {
 
         // Set up actions for the buttons
         editButton.setOnAction(event -> handleEditIngredient(newIngredient));
-        deleteButton.setOnAction(event -> deleteIngredient(ingredientContainer, ingredientLabel));
+        deleteButton.setOnAction(event -> deleteIngredient(ingredientLabel));
 
         // Create an HBox to hold the ingredient information
         ingredientContainer = new HBox(ingredientLabel, editButton, deleteButton);
@@ -132,12 +129,9 @@ public class IngredientsPageController extends BaseController {
 
     private void displayNewIngredient(String newIngredient) {
         Label ingredientLabel = new Label(newIngredient);
-
-        // Create buttons for edit and delete
-//        Button editButton = new Button("");
-//        Button deleteButton = new Button("");
         Button editButton = new Button("Edit");
         Button deleteButton = new Button("Delete");
+
         // Set styles/classes if needed
         ingredientLabel.getStyleClass().add("ingredientLable");
         editButton.getStyleClass().add("editList");
@@ -145,7 +139,7 @@ public class IngredientsPageController extends BaseController {
 
         // Set up actions for the buttons
         editButton.setOnAction(event -> handleEditIngredient(newIngredient));
-        deleteButton.setOnAction(event -> deleteIngredient(ingredientContainer, ingredientLabel));
+        deleteButton.setOnAction(event -> deleteIngredient(ingredientLabel));
 
         // Create an HBox to hold the ingredient information
         HBox ingredientContainer = new HBox(ingredientLabel, editButton, deleteButton);
@@ -255,8 +249,9 @@ public class IngredientsPageController extends BaseController {
         }
     }
 
-    private void deleteIngredient(HBox ingredientContainer, Label ingredientLabel) {
+    private void deleteIngredient(Label ingredientLabel) {
         ingredientList.removeIngredient(ingredientLabel.getText());
+        HBox ingredientContainer = (HBox) ingredientLabel.getParent();
         ingredientListContainer.getChildren().remove(ingredientContainer);
         System.out.println("Ingredients: " + ingredientList.getIngredients());
     }
