@@ -31,6 +31,7 @@
 
     <Label text="We have found these recipes for you!" styleClass="ShowRecipes"/>
 
-    <!-- Define the TilePane -->
-    <TilePane fx:id="recipesContainer" alignment="CENTER" hgap="30.0" vgap="30.0"/>
+    <VBox fx:id="recipesContainer" alignment="CENTER" spacing="10" styleClass="recipesContainer"/>
+
+    <Button text="Done" onAction="#goToHome" styleClass="recipeLinkBtn"/>
 </VBox>

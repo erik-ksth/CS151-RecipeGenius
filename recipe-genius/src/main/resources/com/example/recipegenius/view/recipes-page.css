@@ -3,12 +3,18 @@
     -fx-background-size: cover;
 }
 
+.recipesContainer {
+    -fx-max-width: 1000px;
+    -fx-max-height: 600px;
+}
+
 .recipe-container {
-    -fx-background-image: url("../images/homePageBg.jpg");
-    -fx-background-size: cover;
-    -fx-pref-width: 300px;
-    -fx-pref-height: 300px;
-    -fx-padding: 20%;
+    -fx-background-color: #FFFFFF40;
+    -fx-backdrop-filter: blur(50px);
+    -fx-border-color: #FAFAFA;
+    -fx-border-radius: 15px;
+    -fx-pref-width: 900px;
+    -fx-padding: 20px;
 }
 
 .ShowRecipes {
@@ -31,4 +37,9 @@
     -fx-text-color: red;
     -fx-font-family: "Times New Roman", Times, serif;
     -fx-font-weight: bold;
+}
+
+.recipeLinkBtn {
+    -fx-background-color: white;
+    -fx-padding: 20px;
 }

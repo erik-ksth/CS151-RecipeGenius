@@ -16,8 +16,6 @@ public class Main extends Application {
 
     private StackPane root;
 
-    private IngredientsPageController ingredientsPageController;
-
     @Override
     public void start(Stage primaryStage) {
         // Initialize the root StackPane
@@ -53,7 +51,7 @@ public class Main extends Application {
         }
     }
 
-    private void loadHomePage() {
+    public void loadHomePage() {
         loadPage("/com/example/recipegenius/view/home-page.fxml");
     }
 
@@ -64,10 +62,6 @@ public class Main extends Application {
 
     public void switchToRecipesPage() {
         loadPage("/com/example/recipegenius/view/recipes-page.fxml");
-    }
-
-    public IngredientsPageController getIngredientsPageController() {
-        return ingredientsPageController;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.recipegenius.controller;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -59,6 +60,8 @@ public class IngredientsPageController extends BaseController {
             Button deleteButton = new Button("Delete");
             deleteButton.getStyleClass().add("DeleteButton");
             HBox ingredientContainer = new HBox(ingredientLabel, deleteButton);
+            ingredientContainer.setAlignment(Pos.CENTER);
+            ingredientContainer.setSpacing(10); // Set spacing between label and button
 
             // Set up the delete action for the new button
             deleteButton.setOnAction(event -> deleteIngredient(ingredientContainer, ingredientLabel));
@@ -101,7 +104,7 @@ public class IngredientsPageController extends BaseController {
 
             // String apiKey = properties.getProperty("SPOONACULAR_API_KEY");
             // System.out.println("API KEY ==== "+apiKey);
-            String apiKey = "bf457e24348349a49fbd2894f67de249";
+            String apiKey = "930bab48c9044e6db5df0510743ee973";
 
             String url = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=" + apiKey + "&query="
                     + userInput + "&number=5";
