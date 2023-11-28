@@ -15,7 +15,7 @@ public class RecipeFinder {
     public RecipeFinder() {
     }
 
-    String apiKey = "5dc3339e14f64eecb9f8d41188bbf0f9";
+    String apiKey = "dc10eafafe494c06ae0eeeeff70bb183";
 
     // Method to find recipes
     public RecipesList findRecipes(IngredientList ingredientList) {
