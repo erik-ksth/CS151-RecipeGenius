@@ -6,13 +6,56 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.TilePane?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.recipegenius.controller.RecipesPageController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ListView?>
 
-    <Label text="We have found these recipes for you!"/>
-    <TilePane fx:id="recipesContainer" alignment="CENTER">
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Hyperlink?>
+<?import java.net.URL?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<?import javafx.scene.layout.TilePane?>
+<?import java.util.ArrayList?>
+<VBox alignment="CENTER" spacing="10.0" styleClass="container" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.recipegenius.controller.RecipesPageController">
+    <!-- Add your other FXML elements here -->
+
+    <stylesheets>
+        <URL value="@recipes-page.css"/>
+    </stylesheets>
+
+    <Label text="We have found these recipes for you!" styleClass="ShowRecipes"/>
+
+    <!-- Define the TilePane -->
+    <TilePane fx:id="recipesContainer" alignment="CENTER" hgap="30.0" vgap="30.0">
+        <VBox alignment="BOTTOM_CENTER" styleClass="recipe-container">
+            <Label text="Image1" styleClass="ShowMenu"/>
+            <Text text="Missed Ingredients" styleClass="MissedIngredients"/>
+        </VBox>
+
+        <VBox alignment="BOTTOM_CENTER" styleClass="recipe-container">
+            <Label text="Image2" styleClass="ShowMenu"/>
+            <Text text="Missed Ingredients" styleClass="MissedIngredients"/>
+        </VBox>
+
+        <VBox alignment="BOTTOM_CENTER" styleClass="recipe-container">
+            <Label text="Image3" styleClass="ShowMenu"/>
+            <Text text="Missed Ingredients" styleClass="MissedIngredients"/>
+        </VBox>
+
+        <VBox alignment="BOTTOM_CENTER" styleClass="recipe-container">
+            <Label text="Image4" styleClass="ShowMenu"/>
+            <Text text="Missed Ingredients" styleClass="MissedIngredients"/>
+        </VBox>
+
+        <VBox alignment="BOTTOM_CENTER" styleClass="recipe-container">
+            <Label text="Image5" styleClass="ShowMenu"/>
+            <Text text="Missed Ingredients" styleClass="MissedIngredients"/>
+        </VBox>
     </TilePane>
 </VBox>
