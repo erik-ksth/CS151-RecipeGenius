@@ -3,6 +3,7 @@ module com.example.recipegenius {
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
     requires io.github.cdimascio.dotenv.java;
+    requires java.desktop;
 
 
     opens com.example.recipegenius to javafx.fxml;

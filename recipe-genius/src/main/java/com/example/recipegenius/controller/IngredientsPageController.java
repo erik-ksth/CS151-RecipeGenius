@@ -1,6 +1,7 @@
 package com.example.recipegenius.controller;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -9,17 +10,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.*;
-import java.nio.charset.StandardCharsets;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import com.example.recipegenius.model.DataHolder;
 import com.example.recipegenius.model.IngredientList;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextInputDialog;
 
 public class IngredientsPageController extends BaseController {
+
     @FXML
     private TextField inputField;
 
@@ -29,66 +30,6 @@ public class IngredientsPageController extends BaseController {
     @FXML
     private VBox ingredientListContainer;
 
-    private void displayIngredient(String newIngredient) {
-        Label ingredientLabel = new Label(newIngredient);
-
-        // Create buttons for edit and delete
-        Button editButton = new Button("Edit");
-        Button deleteButton = new Button("Delete");
-
-        // Set styles/classes if needed
-        ingredientLabel.getStyleClass().add("ingredientLable");
-        editButton.getStyleClass().add("editList");
-        deleteButton.getStyleClass().add("deleteIcon");
-
-        // Set up actions for the buttons
-        editButton.setOnAction(event -> handleEditIngredient(newIngredient));
-        deleteButton.setOnAction(event -> deleteIngredient(ingredientLabel));
-
-        // Create an HBox to hold the ingredient information
-        ingredientContainer = new HBox(ingredientLabel, editButton, deleteButton);
-        ingredientContainer.setSpacing(5.0);
-        // Add the HBox to the ingredientListContainer
-        ingredientListContainer.getChildren().add(ingredientContainer);
-    }
-    private void handleEditIngredient(String ingredientName) {
-        // Open a dialog to get the new name for the ingredient
-        TextInputDialog dialog = new TextInputDialog(ingredientName);
-        dialog.setTitle("Edit Ingredient");
-        dialog.setHeaderText(null);
-        dialog.setContentText("Enter the new name for the ingredient:");
-
-        // Show the dialog and wait for the user's response
-        dialog.showAndWait().ifPresent(newName -> {
-            // Check if the user clicked OK and the new name is not empty
-            if (!newName.isEmpty()) {
-                // Update the ingredient name in the view
-                updateIngredientName(ingredientName, newName);
-                System.out.println("Editing ingredient: " + ingredientName + " to " + newName);
-            } else {
-                // Show an alert if the new name is empty
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid name for the ingredient.");
-                alert.showAndWait();
-            }
-        });
-    }
-    // Helper method to update the ingredient name in the view
-    private void updateIngredientName(String oldName, String newName) {
-        // Iterate through the child nodes of ingredientListContainer
-        ingredientListContainer.getChildren().forEach(node -> {
-            HBox hbox = (HBox) node;
-            Label label = (Label) hbox.getChildren().get(0);
-
-            // Check if the label's text matches the old ingredient name
-            if (label.getText().equals(oldName)) {
-                // Update the label with the new ingredient name
-                label.setText(newName);
-            }
-        });
-    }
     @FXML
     private HBox ingredientContainer;
 
@@ -108,51 +49,33 @@ public class IngredientsPageController extends BaseController {
 
     // Add ingredients
     @FXML
-
     private void addIngredient() {
-        String newIngredient = inputField.getText().trim();
-
-        if (!newIngredient.isEmpty() && suggestionList.getItems().contains(newIngredient)) {
-            // Add the ingredient to the list
+        String newIngredient = inputField.getText();
+        if (suggestionList.getItems().contains(newIngredient)) {
             ingredientList.addIngredient(newIngredient);
 
             // Display new ingredient
-            displayNewIngredient(newIngredient);
+            Label ingredientLabel = new Label(newIngredient);
+            ingredientLabel.getStyleClass().add("IngredientLabel");
+            Button deleteButton = new Button("Delete");
+            deleteButton.getStyleClass().add("DeleteButton");
+            HBox ingredientContainer = new HBox(ingredientLabel, deleteButton);
+            ingredientContainer.setAlignment(Pos.CENTER);
+            ingredientContainer.setSpacing(10); // Set spacing between label and button
 
-            // Clear the input field and autocomplete list data
-            clearInputAndSuggestions();
+            // Set up the delete action for the new button
+            deleteButton.setOnAction(event -> deleteIngredient(ingredientContainer, ingredientLabel));
+
+            // Append new ingredient
+            ingredientListContainer.getChildren().add(ingredientContainer);
+
+            // Clear the inputfield and autocomplete list data
+            inputField.clear();
+            suggestionList.getItems().clear();
             System.out.println("Ingredients: " + ingredientList.getIngredients());
         } else {
             System.out.println("Invalid input");
         }
-    }
-
-    private void displayNewIngredient(String newIngredient) {
-        Label ingredientLabel = new Label(newIngredient);
-        Button editButton = new Button("Edit");
-        Button deleteButton = new Button("Delete");
-
-        // Set styles/classes if needed
-        ingredientLabel.getStyleClass().add("ingredientLable");
-        editButton.getStyleClass().add("editList");
-        deleteButton.getStyleClass().add("deleteIcon");
-
-        // Set up actions for the buttons
-        editButton.setOnAction(event -> handleEditIngredient(newIngredient));
-        deleteButton.setOnAction(event -> deleteIngredient(ingredientLabel));
-
-        // Create an HBox to hold the ingredient information
-        HBox ingredientContainer = new HBox(ingredientLabel, editButton, deleteButton);
-        ingredientContainer.setSpacing(1.0);
-        ingredientContainer.getStyleClass().add("listContainer");
-
-        // Add the HBox to the ingredientListContainer
-        ingredientListContainer.getChildren().add(ingredientContainer);
-    }
-
-    private void clearInputAndSuggestions() {
-        inputField.clear();
-        suggestionList.getItems().clear();
     }
 
     // Go to Next page
@@ -161,97 +84,92 @@ public class IngredientsPageController extends BaseController {
         // Check if at least an ingredient has been added.
         if (ingredientList.getLength() > 0) {
             // Pass ingredientList data to recipe page
-            RecipesPageController recipesPageController = new RecipesPageController();
-            recipesPageController.generateRecipes(ingredientList);
+            DataHolder.setIngredients(ingredientList.getIngredients());
             mainApp.switchToRecipesPage();
+            RecipesPageController recipesPageController = new RecipesPageController();
+            recipesPageController.passIngredients(ingredientList);
         } else {
             System.out.println("Please add some ingredients.");
         }
     }
 
+    // Auto-complete method
     private void autoComplete(String userInput) {
+
         try {
-            String apiKey = "dc10eafafe494c06ae0eeeeff70bb183";
-            String encodedUserInput = URLEncoder.encode(userInput, StandardCharsets.UTF_8.toString());
+            // Properties properties = new Properties();
+            // InputStream input = getClass().getResourceAsStream("application.properties");
+            // properties.load(input);
+            // input.close();
+
+            // String apiKey = properties.getProperty("SPOONACULAR_API_KEY");
+            // System.out.println("API KEY ==== "+apiKey);
+            String apiKey = "930bab48c9044e6db5df0510743ee973";
+
             String url = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=" + apiKey + "&query="
-                    + encodedUserInput + "&number=5";
+                    + userInput + "&number=5";
 
             // Create a URL object
-            try {
-                URL apiUrl = new URL(url);
+            URL apiUrl = new URL(url);
 
-                // Open a connection to the URL
-                HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
+            // Open a connection to the URL
+            HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
 
-                try {
-                    // Set the request method to GET
-                    connection.setRequestMethod("GET");
+            // Set the request method to GET
+            connection.setRequestMethod("GET");
 
-                    // Get the response code
-                    int responseCode = connection.getResponseCode();
+            // Get the response code
+            int responseCode = connection.getResponseCode();
 
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        // Read the response
-                        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                            StringBuilder response = new StringBuilder();
-                            String line;
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Read the response
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
 
-                            while ((line = reader.readLine()) != null) {
-                                response.append(line);
-                            }
-
-                            // Parse the JSON response
-                            ObjectMapper objectMapper = new ObjectMapper();
-                            JsonNode jsonNode = objectMapper.readTree(response.toString());
-
-                            // Clear previous items
-                            suggestionList.getItems().clear();
-
-                            if (jsonNode.isArray()) {
-                                for (JsonNode suggestion : jsonNode) {
-                                    String ingredientName = suggestion.get("name").asText();
-                                    System.out.println("Name: " + ingredientName);
-                                    suggestionList.getItems().add(ingredientName);
-                                }
-
-                                // Set the visibility of the suggestionList
-                                suggestionList.setVisible(!suggestionList.getItems().isEmpty());
-
-                                // Add an event handler to the suggestionList
-                                suggestionList.setOnMouseClicked(e -> {
-                                    String selectedItem = suggestionList.getSelectionModel().getSelectedItem();
-                                    // Set the selected item into the inputField
-                                    inputField.setText(selectedItem);
-                                    // Close the auto-complete box
-                                    suggestionList.setVisible(false);
-                                });
-                            }
-                        }
-                    } else {
-                        System.out.println("Error: something is wrong " + responseCode);
-                        try (BufferedReader errorReader = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
-                            String errorLine;
-                            StringBuilder errorResponse = new StringBuilder();
-                            while ((errorLine = errorReader.readLine()) != null) {
-                                errorResponse.append(errorLine);
-                            }
-                            System.out.println("Error response: " + errorResponse.toString());
-                        }
-                    }
-                } finally {
-                    connection.disconnect(); // Close the connection in the finally block
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
                 }
-            } catch (MalformedURLException e) {
-                System.out.println("Malformed URL: " + e.getMessage());
+
+                reader.close();
+
+                // Prase the JSON response
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode = objectMapper.readTree(response.toString());
+
+                // Clear previous items
+                suggestionList.getItems().clear();
+
+                if (jsonNode.isArray()) {
+                    for (JsonNode suggestion : jsonNode) {
+                        String ingredientName = suggestion.get("name").asText();
+                        System.out.println("Name: " + ingredientName);
+                        suggestionList.getItems().add(ingredientName);
+                    }
+
+                    // Set the visibility of the suggestionList
+                    suggestionList.setVisible(!suggestionList.getItems().isEmpty());
+
+                    // Add an event handler to the suggestionList
+                    suggestionList.setOnMouseClicked(e -> {
+                        String selectedItem = suggestionList.getSelectionModel().getSelectedItem();
+                        // Set the selected item into the inputField
+                        inputField.setText(selectedItem);
+                        // Close the auto-complete box
+                        suggestionList.setVisible(false);
+                    });
+                }
+
+            } else {
+                System.out.println("Error: " + responseCode);
             }
-        } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void deleteIngredient(Label ingredientLabel) {
+    private void deleteIngredient(HBox ingredientContainer, Label ingredientLabel) {
         ingredientList.removeIngredient(ingredientLabel.getText());
-        HBox ingredientContainer = (HBox) ingredientLabel.getParent();
         ingredientListContainer.getChildren().remove(ingredientContainer);
         System.out.println("Ingredients: " + ingredientList.getIngredients());
     }

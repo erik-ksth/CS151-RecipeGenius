@@ -36,124 +36,30 @@
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
 }
-.ingredientLable {
-}
-.listContainer{
-        -fx-alignment: center-right;
-       -fx-spacing: 1em;
+
+.ingredientListContainer {
+    --fx-background-color: #F8F8F8;
 }
 
-/* ingredients-page.css */
-
-/* Container styles */
-.container {
-    -fx-background-color: #f5f5f5; /* Light gray background color */
-}
-
-/* Label styles */
-.AddIngredients {
-    -fx-font-size: 24px;
+.IngredientLabel {
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333333; /* Dark gray text color */
+    -fx-font-family: "Times New Roman", Times, serif;
+    -fx-text-fill: black;
 }
 
-/* InputBox styles */
-.InputBox {
-    -fx-font-size: 14px;
-    -fx-padding: 5;
-}
-
-/* SuggestionList styles */
-#suggestionList {
-    -fx-border-color: #CCCCCC;
-    -fx-border-width: 1;
+.DeleteButton {
     -fx-background-color: #FFFFFF;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
-}
-
-#suggestionList .list-cell {
-    -fx-padding: 5 10;
-    -fx-font-size: 14px;
-}
-
-#suggestionList .list-cell:hover {
-    -fx-background-color: #E0E0E0;
-}
-
-/* AddButton styles */
-.AddButton {
-    -fx-background-color: #4CAF50; /* Green */
-    -fx-border: none;
-    -fx-color: white;
-    -fx-padding: 10 20;
-    -fx-text-fill: white;
-    -fx-cursor: hand;
-    -fx-font-size: 16px;
+    -fx-text-fill: black;
+    -fx-text-align: center;
+    -fx-display: inline-block;
+    -fx-font-size: 15px;
+    -fx-font-family: "Times New Roman", Times, serif;
     -fx-font-weight: bold;
+    -fx-border-radius: 5px;
 }
 
-.AddButton:hover {
-    -fx-background-color: #45a049; /* Darker green on hover */
+.DeleteIcon {
+    -fx-background-image: url("../images/deleteIcon.svg");
 }
 
-/* IngredientListContainer styles */
-#ingredientListContainer {
-    -fx-spacing: 10;
-}
-
-/* Individual ingredient styles */
-.ingredientLabel {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #333333;
-}
-
-.editList, .deleteIcon {
-     -fx-background-color: #4CAF50; /* Green */
-    -fx-border: none;
-    -fx-color: white;
-    -fx-padding: 5 10;
-    -fx-text-fill: white;
-    -fx-cursor: hand;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-}
-/* .editList {
-    -fx-background-image: url("../images/editIcon.png");
-    -fx-background-size: cover;
-    -fx-background-repeat: no-repeat;
-    -fx-min-height: 4em;
-    -fx-min-width: 4em;
-    -fx-max-height: 4em;
-    -fx-max-width: 4em;
-}
-
-.deleteIcon {
-    -fx-background-image: url("../images/deleteIcon.png");
-    -fx-background-size: cover;
-    -fx-background-repeat: no-repeat;
-    -fx-min-height: 2em;
-    -fx-min-width: 2em;
-    -fx-max-height: 2em;
-    -fx-max-width: 2em;
-}
-*/
-.editList:hover, .deleteIcon:hover {
--fx-background-color: #45a049; /* Darker green on hover */
-}
-
-/* Continue button styles */
-#goToRecipesButton {
-    -fx-background-color: #3498db; /* Blue */
-    -fx-border: none;
-    -fx-color: white;
-    -fx-padding: 10 20;
-    -fx-text-fill: white;
-    -fx-cursor: hand;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-}
-
-#goToRecipesButton:hover {
-    -fx-background-color: #2980b9; /* Darker blue on hover */
-}

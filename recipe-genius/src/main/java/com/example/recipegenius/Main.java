@@ -1,6 +1,8 @@
 package com.example.recipegenius;
 
 import com.example.recipegenius.controller.BaseController;
+import com.example.recipegenius.controller.IngredientsPageController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -49,7 +51,7 @@ public class Main extends Application {
         }
     }
 
-    private void loadHomePage() {
+    public void loadHomePage() {
         loadPage("/com/example/recipegenius/view/home-page.fxml");
     }
 
@@ -61,4 +63,5 @@ public class Main extends Application {
     public void switchToRecipesPage() {
         loadPage("/com/example/recipegenius/view/recipes-page.fxml");
     }
+
 }

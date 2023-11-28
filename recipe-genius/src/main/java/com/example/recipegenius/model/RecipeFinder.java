@@ -1,6 +1,5 @@
 package com.example.recipegenius.model;
 
-import com.example.recipegenius.controller.RecipesPageController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -8,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 public class RecipeFinder {
 
@@ -15,10 +15,10 @@ public class RecipeFinder {
     public RecipeFinder() {
     }
 
-    String apiKey = "dc10eafafe494c06ae0eeeeff70bb183";
+    String apiKey = "930bab48c9044e6db5df0510743ee973";
 
     // Method to find recipes
-    public RecipesList findRecipes(IngredientList ingredientList) {
+    public RecipesList findRecipes(List<String> ingredientList) {
 
         // Create a list to store recipes
         RecipesList recipesList = new RecipesList();
@@ -35,7 +35,7 @@ public class RecipeFinder {
             // String apiKey = properties.getProperty("SPOONACULAR_API_KEY");
 
             String url = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=" + apiKey + "&ingredients="
-                    + String.join(",+", ingredientList.getIngredients()) + "&number=" + numberOfRecipes;
+                    + String.join(",+", ingredientList) + "&number=" + numberOfRecipes;
 
             // Create a URL object
             URL apiUrl = new URL(url);
@@ -73,8 +73,6 @@ public class RecipeFinder {
                     fetchRecipeInfo(recipeInfo, recipeId);
                     recipeInfo.setMissedIngredientCount(recipe.get("missedIngredientCount").asInt());
                     recipesList.addRecipe(recipeInfo);
-                    RecipesPageController recipesPageController = new RecipesPageController();
-//                    recipesPageController.displayRecipe(recipeInfo);
                 }
 
             } else {
@@ -121,7 +119,7 @@ public class RecipeFinder {
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode recipe = objectMapper.readTree(response.toString());
 
-                // Print out recipe information
+                // Set recipe information
                 recipeInfo.setRecipeName(recipe.get("title").asText());
                 recipeInfo.setImageUrl(recipe.get("image").asText());
                 recipeInfo.setInstructionUrl(recipe.get("sourceUrl").asText());

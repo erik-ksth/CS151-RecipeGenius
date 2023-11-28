@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.TilePane?>
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
@@ -11,15 +12,26 @@
 <?import javafx.scene.control.ListView?>
 
 <?import javafx.scene.layout.GridPane?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.recipegenius.controller.RecipesPageController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Hyperlink?>
+<?import java.net.URL?>
 
-    <Label text="We have found these recipes for you!"/>
-    <VBox fx:id="recipesContainer">
-           <Label fx:id="recipeName"/>
-           <Text fx:id="missedIngredientCount"/>
-    </VBox>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<?import javafx.scene.layout.TilePane?>
+<?import java.util.ArrayList?>
+<VBox alignment="CENTER" spacing="10.0" styleClass="container" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.recipegenius.controller.RecipesPageController">
+    <!-- Add your other FXML elements here -->
+
+    <stylesheets>
+        <URL value="@recipes-page.css"/>
+    </stylesheets>
+
+    <Label text="We have found these recipes for you!" styleClass="ShowRecipes"/>
+
+    <VBox fx:id="recipesContainer" alignment="CENTER" spacing="10" styleClass="recipesContainer"/>
+
+    <Button text="Done" onAction="#goToHome" styleClass="recipeLinkBtn"/>
 </VBox>

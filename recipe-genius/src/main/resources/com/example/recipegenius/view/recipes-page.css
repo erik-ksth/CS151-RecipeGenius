@@ -1,0 +1,45 @@
+.container {
+    -fx-background-image: url("../images/recipesPage.jpg");
+    -fx-background-size: cover;
+}
+
+.recipesContainer {
+    -fx-max-width: 1000px;
+    -fx-max-height: 600px;
+}
+
+.recipe-container {
+    -fx-background-color: #FFFFFF40;
+    -fx-backdrop-filter: blur(50px);
+    -fx-border-color: #FAFAFA;
+    -fx-border-radius: 15px;
+    -fx-pref-width: 900px;
+    -fx-padding: 20px;
+}
+
+.ShowRecipes {
+    -fx-font-size: 40px;
+    -fx-text-fill: white;
+    -fx-font-family: "Times New Roman", Times, serif;
+    -fx-font-weight: bold;
+    -fx-text-indent: 100px;
+}
+
+.ShowMenu{
+    -fx-font-size: 20px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Times New Roman", Times, serif;
+    -fx-font-weight: bold;
+}
+
+.MissedIngredients{
+    -fx-font-size: 15px;
+    -fx-text-color: red;
+    -fx-font-family: "Times New Roman", Times, serif;
+    -fx-font-weight: bold;
+}
+
+.recipeLinkBtn {
+    -fx-background-color: white;
+    -fx-padding: 20px;
+}
