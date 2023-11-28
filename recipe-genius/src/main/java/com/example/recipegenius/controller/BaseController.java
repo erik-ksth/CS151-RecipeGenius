@@ -8,4 +8,8 @@ public class BaseController {
     public void setMainApp(Main mainApp) {
         this.mainApp = mainApp;
     }
+
+    public Main getMainApp() {
+        return mainApp;
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.recipegenius;
 
 import com.example.recipegenius.controller.BaseController;
+import com.example.recipegenius.controller.IngredientsPageController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +15,8 @@ import java.io.IOException;
 public class Main extends Application {
 
     private StackPane root;
+
+    private IngredientsPageController ingredientsPageController;
 
     @Override
     public void start(Stage primaryStage) {
@@ -61,4 +65,9 @@ public class Main extends Application {
     public void switchToRecipesPage() {
         loadPage("/com/example/recipegenius/view/recipes-page.fxml");
     }
+
+    public IngredientsPageController getIngredientsPageController() {
+        return ingredientsPageController;
+    }
+
 }
