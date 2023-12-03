@@ -1,9 +1,9 @@
 package com.example.recipegenius.controller;
-
+import javafx.geometry.Insets;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URI;
-import java.awt.Desktop;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +19,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -69,6 +70,10 @@ private VBox recipesContainer;
                     ImageView imageView = new ImageView(new Image(recipeInfo.getImageUrl()));
                     imageView.setFitWidth(100); // Set the width as per your requirement
                     imageView.setFitHeight(100); // Set the height as per your requirement
+                    imageView.getStyleClass().add("recipe-image"); // Add a CSS class to the ImageView
+                    // Create a StackPane to handle object-fit: contain
+                    StackPane imageContainer = new StackPane(imageView);
+                    imageContainer.getStyleClass().add("image-container");
 
                     VBox recipeLabelContainer = new VBox(recipeName, missedIngredientCount);
                     BorderPane recipeContainer = new BorderPane();
