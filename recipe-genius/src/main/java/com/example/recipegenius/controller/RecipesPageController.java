@@ -1,4 +1,11 @@
 package com.example.recipegenius.controller;
+import javafx.geometry.Insets;
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -17,13 +24,17 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
-
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 public class RecipesPageController extends BaseController {
 
-     @FXML
-     private VBox recipesContainer;
+    @FXML
+    private VBox recipesContainer;
 
      private List<String> ingredients = new ArrayList<>();
 
@@ -37,11 +48,12 @@ public class RecipesPageController extends BaseController {
 
      @FXML
      public void initialize() {
-
+       
           // Call the generateRecipes method with the obtained ingredientList
           // generateRecipes(ingredients);
           List<String> ingredients = DataHolder.getIngredients();
           generateRecipes(ingredients);
+       
      }
 
      // Generate Recipes
@@ -64,15 +76,27 @@ public class RecipesPageController extends BaseController {
                     Hyperlink seeRecipeBtn = new Hyperlink("See Recipe");
                     seeRecipeBtn.getStyleClass().add("recipeLinkBtn");
 
+                    // Load recipe image
+                    ImageView imageView = new ImageView(new Image(recipeInfo.getImageUrl()));
+                    imageView.setFitWidth(100); // Set the width as per your requirement
+                    imageView.setFitHeight(100); // Set the height as per your requirement
+                    imageView.getStyleClass().add("recipe-image"); // Add a CSS class to the ImageView
+                    // Create a StackPane to handle object-fit: contain
+                    StackPane imageContainer = new StackPane(imageView);
+                    imageContainer.getStyleClass().add("image-container");
+
                     VBox recipeLabelContainer = new VBox(recipeName, missedIngredientCount);
 
                     BorderPane recipeContainer = new BorderPane();
                     BorderPane.setAlignment(recipeLabelContainer, Pos.CENTER);
                     BorderPane.setAlignment(seeRecipeBtn, Pos.CENTER);
 
-                    recipeContainer.getStyleClass().add("recipe-container");
-                    recipeContainer.setLeft(recipeLabelContainer);
+                    // Adding image and details to the container
+                    recipeContainer.setLeft(imageView);
+                    recipeContainer.setCenter(recipeLabelContainer);
                     recipeContainer.setRight(seeRecipeBtn);
+
+                    recipeContainer.getStyleClass().add("recipe-container");
                     recipesContainer.getChildren().addAll(recipeContainer);
 
 //                    String imageUrl = recipeInfo.getImageUrl();
@@ -101,10 +125,8 @@ public class RecipesPageController extends BaseController {
 
      public static void displayRecipe(String url) {
           try {
-               Desktop.getDesktop().browse(new URI(url));
-          } catch (IOException e) {
-               e.printStackTrace();
-          } catch (URISyntaxException e) {
+               java.awt.Desktop.getDesktop().browse(new URI(url));
+          } catch (IOException | URISyntaxException e) {
                e.printStackTrace();
           }
      }
@@ -113,5 +135,4 @@ public class RecipesPageController extends BaseController {
      protected void goToHome() {
           mainApp.loadHomePage();
      }
-
 }
