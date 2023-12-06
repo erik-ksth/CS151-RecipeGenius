@@ -10,6 +10,7 @@
 
 <?import java.net.URL?>
 
+<?import javafx.scene.text.Text?>
 <VBox alignment="CENTER_RIGHT" spacing="20.0" styleClass="container" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.recipegenius.controller.IngredientsPageController">
     <padding>
@@ -22,12 +23,13 @@
 
     <Label text="What ingredients do you have for today?" styleClass="AddIngredients"/>
     <HBox alignment="TOP_RIGHT" spacing="10.0">
-        <VBox alignment="CENTER_RIGHT">
+        <VBox alignment="CENTER">
             <TextField fx:id="inputField" prefHeight="32.0" prefWidth="600.0" promptText="Enter ingredients" onKeyReleased="#handleInput" styleClass="InputBox"/>
             <ListView fx:id="suggestionList" prefHeight="120.0" visible="false"/>
+            <Text fx:id="errorMessage" text="" styleClass="errorMessage"/>
         </VBox>
         <Button styleClass="AddButton" prefHeight="32.0" prefWidth="80.0" text="Add" onAction="#addIngredient" />
     </HBox>
-    <VBox fx:id="ingredientListContainer" alignment="BASELINE_LEFT"/>
+    <VBox fx:id="ingredientListContainer" alignment="BASELINE_LEFT" spacing="10.0"/>
     <Button text="Continue" onAction="#goToRecipesPage" styleClass="AddButton"/>
 </VBox>

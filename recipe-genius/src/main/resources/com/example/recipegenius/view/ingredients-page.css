@@ -58,6 +58,7 @@
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
 }
+
 .editList, .DeleteButton {
         -fx-cursor: hand;
         -fx-background-color: #FFFFFF;
@@ -73,3 +74,6 @@
     -fx-background-image: url("../images/deleteIcon.svg");
 }
 
+.errorMessage {
+    -fx-text-fill: red;
+}

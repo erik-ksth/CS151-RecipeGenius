@@ -7,6 +7,13 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URI;
+import java.awt.Desktop;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.recipegenius.model.DataHolder;
 import com.example.recipegenius.model.IngredientList;
 import com.example.recipegenius.model.RecipeFinder;
@@ -20,15 +27,16 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 public class RecipesPageController extends BaseController {
 
-@FXML
-private VBox recipesContainer;
+    @FXML
+    private VBox recipesContainer;
 
-     private List<String> ingredients;
+     private List<String> ingredients = new ArrayList<>();
 
      public RecipesPageController() {
      }
@@ -40,10 +48,12 @@ private VBox recipesContainer;
 
      @FXML
      public void initialize() {
+       
           // Call the generateRecipes method with the obtained ingredientList
           // generateRecipes(ingredients);
           List<String> ingredients = DataHolder.getIngredients();
           generateRecipes(ingredients);
+       
      }
 
      // Generate Recipes
@@ -60,7 +70,7 @@ private VBox recipesContainer;
                     recipeName.getStyleClass().add("ShowMenu");
 
                     Text missedIngredientCount = new Text(
-                            "Missed Ingredients Count: " + recipeInfo.getMissedIngredientCount());
+                              "Missed Ingredients Count: " + recipeInfo.getMissedIngredientCount());
                     missedIngredientCount.getStyleClass().add("MissedIngredients");
 
                     Hyperlink seeRecipeBtn = new Hyperlink("See Recipe");
@@ -76,6 +86,7 @@ private VBox recipesContainer;
                     imageContainer.getStyleClass().add("image-container");
 
                     VBox recipeLabelContainer = new VBox(recipeName, missedIngredientCount);
+
                     BorderPane recipeContainer = new BorderPane();
                     BorderPane.setAlignment(recipeLabelContainer, Pos.CENTER);
                     BorderPane.setAlignment(seeRecipeBtn, Pos.CENTER);
@@ -88,6 +99,23 @@ private VBox recipesContainer;
                     recipeContainer.getStyleClass().add("recipe-container");
                     recipesContainer.getChildren().addAll(recipeContainer);
 
+//                    String imageUrl = recipeInfo.getImageUrl();
+//                    System.out.println(imageUrl);
+//                    try {
+//                         Image image = new Image(imageUrl);
+//                         BackgroundImage backgroundImage = new BackgroundImage(
+//                                 image,
+//                                 BackgroundRepeat.NO_REPEAT,
+//                                 BackgroundRepeat.NO_REPEAT,
+//                                 BackgroundPosition.DEFAULT,
+//                                 BackgroundSize.DEFAULT
+//                         );
+//                         Background background = new Background(backgroundImage);
+//                         recipeContainer.setBackground(background);
+//                    } catch (Exception e) {
+//                         System.out.println("Error loading background image: " + e.getMessage());
+//                    }
+//                    recipeContainer.setStyle("-fx-background-image: url('" + imageUrl + "')");
                     seeRecipeBtn.setOnAction(event -> displayRecipe(recipeInfo.getInstructionUrl()));
                }
           } catch (NullPointerException e) {

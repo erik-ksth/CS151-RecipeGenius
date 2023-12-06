@@ -20,6 +20,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.text.Text;
+
 public class IngredientsPageController extends BaseController {
 
     @FXML
@@ -40,6 +42,9 @@ public class IngredientsPageController extends BaseController {
     @FXML
     private Button deleteButton;
 
+    @FXML
+    private Text errorMessage;
+
     IngredientList ingredientList = new IngredientList();
 
     // Get the user input and call autocomplete method
@@ -59,6 +64,7 @@ public class IngredientsPageController extends BaseController {
             Label ingredientLabel = new Label(newIngredient);
             ingredientLabel.getStyleClass().add("IngredientLabel");
             Button deleteButton = new Button("Delete");
+
             Button editButton = new Button("Edit");
             deleteButton.getStyleClass().add("DeleteButton");
             editButton.getStyleClass().add("editList");
@@ -72,12 +78,16 @@ public class IngredientsPageController extends BaseController {
             // Append new ingredient
             ingredientListContainer.getChildren().add(ingredientContainer);
 
+            // Delete Error Message
+            errorMessage.setText("");
+
             // Clear the inputfield and autocomplete list data
             inputField.clear();
             suggestionList.getItems().clear();
             System.out.println("Ingredients: " + ingredientList.getIngredients());
         } else {
             System.out.println("Invalid input");
+            errorMessage.setText("Invalid input");
         }
     }
     private void handleEditIngredient(String ingredientName) {
@@ -129,6 +139,7 @@ public class IngredientsPageController extends BaseController {
             recipesPageController.passIngredients(ingredientList);
         } else {
             System.out.println("Please add some ingredients.");
+            errorMessage.setText("Please add some ingredients.");
         }
     }
 
@@ -143,7 +154,7 @@ public class IngredientsPageController extends BaseController {
 
             // String apiKey = properties.getProperty("SPOONACULAR_API_KEY");
             // System.out.println("API KEY ==== "+apiKey);
-            String apiKey = "dc10eafafe494c06ae0eeeeff70bb183";
+            String apiKey = "930bab48c9044e6db5df0510743ee973";
 
             String url = "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=" + apiKey + "&query="
                     + userInput + "&number=5";
@@ -184,6 +195,7 @@ public class IngredientsPageController extends BaseController {
                         String ingredientName = suggestion.get("name").asText();
                         System.out.println("Name: " + ingredientName);
                         suggestionList.getItems().add(ingredientName);
+                        errorMessage.setText("");
                     }
 
                     // Set the visibility of the suggestionList
