@@ -6,7 +6,7 @@
 .recipesContainer {
     -fx-max-width: 1000px;
     -fx-max-height: 600px;
-    -fx-overflow:scroll;
+    -fx-overflow: scroll;
     -fx-padding: 1em 0em ;
     -fx-transition:ease-in-out 2s;
 }

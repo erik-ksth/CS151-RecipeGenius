@@ -18,8 +18,6 @@ import com.example.recipegenius.model.DataHolder;
 import com.example.recipegenius.model.IngredientList;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.text.Text;
 
 public class IngredientsPageController extends BaseController {
@@ -63,18 +61,17 @@ public class IngredientsPageController extends BaseController {
             // Display new ingredient
             Label ingredientLabel = new Label(newIngredient);
             ingredientLabel.getStyleClass().add("IngredientLabel");
-            Button deleteButton = new Button("Delete");
 
-            Button editButton = new Button("Edit");
+            Button deleteButton = new Button("Delete");
             deleteButton.getStyleClass().add("DeleteButton");
-            editButton.getStyleClass().add("editList");
-            HBox ingredientContainer = new HBox(ingredientLabel,  editButton, deleteButton);
-            ingredientContainer.setAlignment(Pos.CENTER_RIGHT);
+
+            HBox ingredientContainer = new HBox(ingredientLabel, deleteButton);
+            ingredientContainer.setAlignment(Pos.CENTER);
             ingredientContainer.setSpacing(10); // Set spacing between label and button
 
             // Set up the delete action for the new button
             deleteButton.setOnAction(event -> deleteIngredient(ingredientContainer, ingredientLabel));
-            editButton.setOnAction(event -> handleEditIngredient(newIngredient));
+            
             // Append new ingredient
             ingredientListContainer.getChildren().add(ingredientContainer);
 
@@ -89,43 +86,6 @@ public class IngredientsPageController extends BaseController {
             System.out.println("Invalid input");
             errorMessage.setText("Invalid input");
         }
-    }
-    private void handleEditIngredient(String ingredientName) {
-        // Open a dialog to get the new name for the ingredient
-        TextInputDialog dialog = new TextInputDialog(ingredientName);
-        dialog.setTitle("Edit Ingredient");
-        dialog.setHeaderText(null);
-        dialog.setContentText("Enter the new name for the ingredient:");
-
-        // Show the dialog and wait for the user's response
-        dialog.showAndWait().ifPresent(newName -> {
-            // Check if the user clicked OK and the new name is not empty
-            if (!newName.isEmpty()) {
-                // Update the ingredient name in the view
-                updateIngredientName(ingredientName, newName);
-                System.out.println("Editing ingredient: " + ingredientName + " to " + newName);
-            } else {
-                // Show an alert if the new name is empty
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setHeaderText(null);
-                alert.setContentText("Please enter a valid name for the ingredient.");
-                alert.showAndWait();
-            }
-        });
-    }
-    private void updateIngredientName(String oldName, String newName) {
-        // Iterate through the child nodes of ingredientListContainer
-        ingredientListContainer.getChildren().forEach(node -> {
-            HBox hbox = (HBox) node;
-            Label label = (Label) hbox.getChildren().get(0);
-
-            // Check if the label's text matches the old ingredient name
-            if (label.getText().equals(oldName)) {
-                // Update the label with the new ingredient name
-                label.setText(newName);
-            }
-        });
     }
     // Go to Next page
     @FXML
