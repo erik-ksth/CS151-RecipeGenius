@@ -1,4 +1,3 @@
-# CS151-RecipeGenius
 **The group project for CS 151: Object Oriented Design course at San José State University.**
 </br>
 
@@ -150,3 +149,15 @@ In shaping the architecture of our Recipe Generator project, Hardik was pivotal 
   <li>Main.java is the main file of the application.</li>
   <li>Therefore, the program can simply be run by running Main.java.</li>
 </ul>
+
+<h2>Snapshots</h2>
+<img width="1280" alt="image" src="https://github.com/erik-ksth/CS151-RecipeGenius/assets/115902452/c2803a1d-726c-478f-adee-0209a400b445">
+<img width="1280" alt="image" src="https://github.com/erik-ksth/CS151-RecipeGenius/assets/115902452/7b78fd32-2322-4938-bfd2-1129d4370618">
+<img width="1280" alt="image" src="https://github.com/erik-ksth/CS151-RecipeGenius/assets/115902452/3830dcbe-0dd3-4e6d-8b5c-8e5f5500af94">
+<img width="1278" alt="image" src="https://github.com/erik-ksth/CS151-RecipeGenius/assets/115902452/1633375b-5d21-4ce7-adc3-57b91ee0780e">
+<img width="1278" alt="image" src="https://github.com/erik-ksth/CS151-RecipeGenius/assets/115902452/fdd7df7c-8610-4e06-91bc-5b14cd163579">
+
+
+
+
+
